@@ -1,5 +1,11 @@
 package Model;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.util.Observable;
+import javax.swing.ImageIcon;
+
 public class RebelSpaceTower extends SpaceIcon {
 
     public RebelSpaceTower(int x_position, int y_position){
@@ -22,4 +28,17 @@ public class RebelSpaceTower extends SpaceIcon {
         }
         return rebel_space_tower_attack_matrix;
     }
+    
+     @Override
+    public void draw(Graphics2D g) {
+        
+        int squareWidth = 54;
+        
+        ImageIcon referencia1 = new ImageIcon("img/nave1icone.png"); //SpaceTower
+        Image nave1 = referencia1.getImage();
+        g.drawImage(nave1, squareWidth*super.getX()+327, squareWidth*super.getY()+87, null);
+        
+    }
+
+    
 }

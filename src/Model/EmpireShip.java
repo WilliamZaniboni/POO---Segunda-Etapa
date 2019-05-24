@@ -1,8 +1,25 @@
 package Model;
 
+import View.Canvas;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.ImageIcon;
+
 public class EmpireShip extends SpaceIcon {
+    
+    private ThreadMove threadmove;
+    private Thread tr;
+    private Canvas canvas;
+    
     public EmpireShip(int y_position){
+        
         super((Constants.BATTLEFIELD_X_DIM-1), y_position, Constants.EMPIRESHIP_LIFE);
+        threadmove = new ThreadMove(y_position, this);
+        tr = new Thread(threadmove);
+        tr.start();
+        
     }
 
     @Override
@@ -44,4 +61,28 @@ public class EmpireShip extends SpaceIcon {
         }
         return empire_ship_attack_matrix;
     }
+    
+    public void setNewxposition(int i){
+        super.setY(i);
+        
+    }
+    
+    
+    @Override
+    public void draw(Graphics2D g) {
+        
+        int squareWidth = 54;
+        
+        ImageIcon referencia4 = new ImageIcon("img/eticone.png"); //Inimigo
+        Image nave4 = referencia4.getImage();
+
+        g.drawImage(nave4, squareWidth*super.getX()+327, squareWidth*super.getY()+87, null);
+        
+        this.setNewxposition(threadmove.getY_position());
+        
+        
+    }
+
+     
+    
 }

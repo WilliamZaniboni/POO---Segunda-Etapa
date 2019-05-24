@@ -22,6 +22,8 @@ package Controller;
 
 import Mathematics.BasicLinearAlgebra;
 import Model.*;
+import View.Canvas;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -40,14 +42,17 @@ public class FightController implements Observer {
         private Battlefield battlefield;
         private Player player;
         private Random random;
+        private DrawController drawcontroller;
+        private Canvas canvas;
 
     //CONSTRUCTOR ======================================================================================================
-        public FightController(Battlefield battlefield, Player player) {
+        public FightController(Battlefield battlefield, Player player, DrawController drawcontroller) {
             this.battlefield = battlefield;
             this.player = player;
+            this.drawcontroller = drawcontroller;
             random = new Random();
         }
-
+       
 
     //METHODS ==========================================================================================================
 
@@ -73,6 +78,16 @@ public class FightController implements Observer {
             public ArrayList<SpaceIcon> getEmpire() {
                 return empire;
             }
+            
+        //teste
+            
+        public void setdrawingController(){
+            
+            drawcontroller.setArrayList(rebels, empire);
+            
+        }
+     
+            
         //Inserção de um novo SpaceIcon --------------------------------------------------------------------------------
             public boolean insertNewSpaceTower(int x, int y){
                 if(battlefield.getMoveMatrix()[x][y] == 0 && player.getGold()>=Constants.SPACE_TOWER_GOLD){
@@ -81,7 +96,8 @@ public class FightController implements Observer {
                     battlefield.setMoveMatrixField(x, y, 1);
                     battlefield.setOccupiedMatrix(x,y,1);
                     System.out.println("SpaceTower criada em: " + x + ", " + y);          
-                    player.setNewgold(Constants.SPACE_TOWER_GOLD);                   
+                    player.setNewgold(Constants.SPACE_TOWER_GOLD);   
+                    this.setdrawingController();
                     return true;
                 }
                 else{
@@ -98,6 +114,7 @@ public class FightController implements Observer {
                     battlefield.setOccupiedMatrix(x,y,2);
                     System.out.println("Starshiṕ criada em: " + x + ", " + y);
                     player.setNewgold(Constants.STARSHIP_GOLD);
+                    this.setdrawingController();
                     return true;
                 }
                 else{
@@ -114,6 +131,7 @@ public class FightController implements Observer {
                     battlefield.setOccupiedMatrix(x,y,3);
                     System.out.println("Starbomb criada em: " + x + ", " + y);
                     player.setNewgold(Constants.STARBOMB_GOLD);
+                    this.setdrawingController();
                     return true;
                 }
                 else{
@@ -129,6 +147,7 @@ public class FightController implements Observer {
                     battlefield.setMoveMatrixField(Constants.BATTLEFIELD_X_DIM-1, y, 2);
                     battlefield.setOccupiedMatrix(Constants.BATTLEFIELD_X_DIM-1,y,4);
                     System.out.println("EmpireShip criada em: " + (Constants.BATTLEFIELD_X_DIM - 1) + ", " + y);
+                    this.setdrawingController();
                     return true;
                 }
                 else{
@@ -238,13 +257,9 @@ public class FightController implements Observer {
                 }
             }
             
-            
-            
-            
-
-        //Atualiza os dados do FightController com base em update do EnvironmentController -----------------------------
+          //Atualiza os dados do FightController com base em update do EnvironmentController -----------------------------
             @Override
-            public void update(Observable o, Object arg) {
+            public void update(Observable o, Object arg) { 
                 EnvironmentController controller = (EnvironmentController) arg;
                 if(controller.getUpdating_mode() == 0){
                     boolean isPossible;
@@ -280,6 +295,5 @@ public class FightController implements Observer {
 
                 }
             }
-
 
 }

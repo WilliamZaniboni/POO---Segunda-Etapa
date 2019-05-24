@@ -1,5 +1,8 @@
 package Model;
 
+import java.awt.Graphics2D;
+import java.util.Observer;
+
 public abstract class SpaceIcon implements SpaceFighter {
 
     private int x;
@@ -35,8 +38,10 @@ public abstract class SpaceIcon implements SpaceFighter {
     public void setLife_value(int life_value) {
         this.life_value = life_value;
     }
-
-
+    
+    @Override
     public abstract void Move(Battlefield battlefield);
+    @Override
     public abstract int[][] Attack(int[][] moveMatrix);
+    public abstract void draw(Graphics2D g);
 }

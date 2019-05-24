@@ -1,10 +1,7 @@
 package SpaceBattle;
 
-import Controller.EnvironmentController;
 import Controller.MenuController;
-import Model.Player;
-import Model.UpdateClass;
-import View.Environment;
+import View.Informacoes;
 import View.Menu;
 import View.Menu_usuario;
 
@@ -15,16 +12,22 @@ public class Main {
       java.awt.EventQueue.invokeLater(new Runnable(){
       public void run() {
           
+          //iniciando os menus
           Menu menu = new Menu();
           Menu_usuario menu_usuario = new Menu_usuario();
-          
+          Informacoes informacoes = new Informacoes();
           MenuController menu_controller = new MenuController();
           
+          
+          //adicionando os controllers dos menus
           menu_controller.addMenu(menu);
           menu.addController(menu_controller);
           
           menu_controller.addMenu_usuario(menu_usuario);
           menu_usuario.addController(menu_controller);
+          
+          menu_controller.addInformacoes(informacoes);
+          informacoes.addController(menu_controller);
           
       }
     });

@@ -17,8 +17,8 @@ import Model.Constants;
 import Model.Player;
 import Model.ThreadTimer;
 import Model.UpdateClass;
+import View.Canvas;
 import View.Environment;
-import View.Menu;
 import View.Menu_usuario;
 
 //Class - EnvironmentController ========================================================================================
@@ -38,19 +38,22 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
         private ThreadTimer time;
         private Thread tr;
         private Menu_usuario menu_usuario;
+        private DrawController drawcontroller;
+        private Canvas canvas;
         
   
     //CONSTRUCTOR ======================================================================================================
-    public EnvironmentController(Menu_usuario menu_usuario) {
+    public EnvironmentController(Menu_usuario menu_usuario, DrawController drawcontroller) {
         //Constrói a infraestrutura de luta dentro do jogo -------------------------------------------------------------
             battlefield = new Battlefield(Constants.BATTLEFIELD_X_DIM, Constants.BATTLEFIELD_Y_DIM);
             this.menu_usuario = menu_usuario;
             Player player = new Player(menu_usuario);
-            fightController = new FightController(battlefield, player);
+            this.drawcontroller = drawcontroller;
+            fightController = new FightController(battlefield, player, drawcontroller );
             this.registerObserver(fightController);
             
     }
-
+    
 
     //METHODS ==========================================================================================================
         public void addView (Environment view){
@@ -99,19 +102,15 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
                 int quadrantey = (y - 94)/54;
                 boolean isPossible;
 
-                if((x<327) || (x>1135) || (y<94) || (y>526) ){
-                    environment.getClickLabel().setText("x:"+x+"  y:"+y+"   -   Quadrante: [null]");
-
-                }
-                else{
-                    environment.getClickLabel().setText("x:"+x+"  y:"+y+"   -   Quadrante: ["+quadrantex+","+quadrantey+"]");
+                
+               
+                    
                     if(flag_for_rebel_choice != 0){
                         this.last_x_quad = quadrantex;
                         this.last_y_quad = quadrantey;
                         this.updating_mode = 0;
                         fightController.update(null, this);
                     }
-                }
 
 
 
@@ -142,13 +141,7 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
                 int quadrantex = (x - 327)/54;
                 int quadrantey = (y - 94)/54;
 
-                if((x<327) || (x>1135) || (y<94) || (y>526) ){
-                    environment.getClickLabel().setText("x:"+x+"  y:"+y+"   -   Quadrante: [null]");
-
-                }
-                else{
-                    environment.getCoordenadaLabel().setText("x:"+x+"  y:"+y+"   -   Quadrante: ["+quadrantex+","+quadrantey+"]");
-                }
+                
                 environment.getMouseCoord().setLocation(x, y);
                 environment.repaint();
             }

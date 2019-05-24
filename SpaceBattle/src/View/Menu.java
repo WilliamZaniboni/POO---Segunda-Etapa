@@ -1,35 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
-import Controller.EnvironmentController;
 import Controller.MenuController;
 import Model.UpdateClass;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import static java.awt.font.TextAttribute.FONT;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-/**
- *
- * @author willi
- */
+
 public class Menu extends javax.swing.JFrame {
     
     private UpdateClass updater;
     private JButton play;
     private JButton continue_thegame;
+    private JButton informations;
     
-    public Menu() throws FontFormatException {
+    public Menu(){
         
         initComponents();
         this.setLocationRelativeTo(null);
@@ -39,11 +28,20 @@ public class Menu extends javax.swing.JFrame {
         
         play = new JButton();
         continue_thegame = new JButton();
+        informations = new JButton();
         
         try {
-            Font fonte= Font.createFont(Font.TRUETYPE_FONT, new File("img/8-bit pusab.ttf")).deriveFont(Font.PLAIN, 15);
-            play.setFont(fonte);
-            continue_thegame.setFont(fonte);
+            Font fonte;
+            try {
+                fonte = Font.createFont(Font.TRUETYPE_FONT, new File("img/8-bit pusab.ttf")).deriveFont(Font.PLAIN, 15);
+                play.setFont(fonte);
+                continue_thegame.setFont(fonte);
+                informations.setFont(fonte);
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+            
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,6 +58,13 @@ public class Menu extends javax.swing.JFrame {
         continue_thegame.setBounds(540, 380, 200, 60);
         continue_thegame.setToolTipText("Utilizar um arquivo de save" ); //janela de texto que aparece quando passa o mouse sobre o botão
 
+        //Adicionando o botão para exibir as informações do projeto
+        informations.setText("Sobre");
+        jLabel1.add(informations);
+        informations.setBounds(540, 460, 200, 60);
+        informations.setToolTipText("Informações sobre o projeto" ); //janela de texto que aparece quando passa o mouse sobre o botão
+
+        
         
     }
 
@@ -68,9 +73,12 @@ public class Menu extends javax.swing.JFrame {
   
         //adicionando o listener dos botões
         play.addActionListener(menu_controller);
-        continue_thegame.addActionListener(menu_controller);      
+        continue_thegame.addActionListener(menu_controller);   
+        informations.addActionListener(menu_controller);
         
     }
+    
+    //Getters dos botões ==================================================================
 
     public JButton getPlay() {
         return play;
@@ -79,16 +87,11 @@ public class Menu extends javax.swing.JFrame {
     public JButton getContinue_thegame() {
         return continue_thegame;
     }
+
+    public JButton getInformations() {
+        return informations;
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-      
        
  
     
@@ -106,6 +109,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SCC0204 - Battle Space");
         setMinimumSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/menu.jpeg"))); // NOI18N

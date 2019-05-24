@@ -29,7 +29,7 @@ public class Menu_usuario extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/menu_usuario_gif.gif")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/menu_usuario_gif.gif")));
         
         play = new JButton();
         
@@ -129,6 +129,8 @@ public class Menu_usuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SCC0204 - Battle Space");
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\willi\\Desktop\\main_background.png")); // NOI18N
 

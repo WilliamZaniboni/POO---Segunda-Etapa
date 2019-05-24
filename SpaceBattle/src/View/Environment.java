@@ -88,24 +88,11 @@ public class Environment extends javax.swing.JFrame implements Observer {
             button_next_cycle = new JButton(imgButton_next );
             button_next_cycle.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(79, 206, 234), 3)); //cor amarela ao redor do botão
             jLabel1.add(button_next_cycle);
-            button_next_cycle.setBounds(120, 0, 94, 94);
+            button_next_cycle.setBounds(125, 40, 94, 94);
             button_next_cycle.setToolTipText("Avançar ciclo" ); //janela de texto que aparece quando passa o mouse sobre o botão
 
 
-        //Adicão das labels que apresentam as coordenadas do mouse sobre o panel ===========================================
-    
-            jLabel1.add(jLabel2);
-            jLabel2.setBounds(4, 130, 74, 16);
-    
-            jLabel1.add(coordenadaLabel);
-            coordenadaLabel.setBounds(78, 130, 540, 16);
-    
-            jLabel1.add(jLabel3);
-            jLabel3.setBounds(4, 146, 91, 16);
-    
-            jLabel1.add(clickLabel);
-            clickLabel.setBounds(96, 146, 540, 16);
-   
+        
         //Adição das Labels de escolha de Rebelde (Informações adicionais sobre o SpaceIcon Rebelde) =======================
     
             jLabel1.add(jLabel4); //atributos da nave 3
@@ -132,17 +119,17 @@ public class Environment extends javax.swing.JFrame implements Observer {
          //Label para informar o ciclo
          
             jLabel1.add(jLabel9); //label para informar o ciclo
-            jLabel9.setBounds(35, 5, 80, 40);
+            jLabel9.setBounds(40, 45, 80, 40);
             jLabel9.setText("0º");
             
             jLabel1.add(jLabel10); //label para informar o ciclo
-            jLabel10.setBounds(30, 40, 100, 60);
+            jLabel10.setBounds(35, 80, 100, 60);
             jLabel10.setText("CICLO");
             
           //Label para informar o tempo restante
           
             jLabel1.add(jLabel11); //label para informar o ciclo
-            jLabel11.setBounds(1133, 44, 140, 40);
+            jLabel11.setBounds(1133, 25, 140, 40);
            
             
     }
@@ -236,21 +223,6 @@ public class Environment extends javax.swing.JFrame implements Observer {
         this.mouseCoord = mouseCoord;
     }
   
-    public JLabel getClickLabel() {
-        return clickLabel;
-    }
-
-    public JLabel getCoordenadaLabel() {
-        return coordenadaLabel;
-    }
-
-    public void setClickLabel(JLabel clickLabel) {
-        this.clickLabel = clickLabel;
-    }
-
-    public void setCoordenadaLabel(JLabel coordenadaLabel) {
-        this.coordenadaLabel = coordenadaLabel;
-    }
     
     //Verificação se o botão foi pressionado e ações subsequentes ======================================================
 
@@ -516,10 +488,6 @@ public class Environment extends javax.swing.JFrame implements Observer {
     private void initComponents() {
 
         jPCanvas = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        coordenadaLabel = new javax.swing.JLabel();
-        clickLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -550,22 +518,6 @@ public class Environment extends javax.swing.JFrame implements Observer {
             jPCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 558, Short.MAX_VALUE)
         );
-
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Click do mouse:");
-
-        coordenadaLabel.setBackground(new java.awt.Color(0, 0, 0));
-        coordenadaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        coordenadaLabel.setText(" ");
-
-        clickLabel.setBackground(new java.awt.Color(0, 0, 0));
-        clickLabel.setForeground(new java.awt.Color(255, 255, 255));
-        clickLabel.setText(" ");
-
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Coordenada:");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/atributos_nave3.png"))); // NOI18N
 
@@ -599,15 +551,6 @@ public class Environment extends javax.swing.JFrame implements Observer {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPCanvas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(coordenadaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clickLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -642,27 +585,20 @@ public class Environment extends javax.swing.JFrame implements Observer {
                 .addComponent(jPCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(coordenadaLabel)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(clickLabel))
-                    .addComponent(jLabel2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(50, 50, 50)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addGap(78, 78, 78)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(105, 105, 105)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(41, 41, 41)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -682,13 +618,9 @@ public class Environment extends javax.swing.JFrame implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel clickLabel;
-    private javax.swing.JLabel coordenadaLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

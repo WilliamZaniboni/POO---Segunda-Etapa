@@ -8,6 +8,9 @@ public class Constants {
     //Tempo de inclusão das naves
     public static final int TIME = 10;
     
+    //Velocidade de locomoção das naves inimigas em pixel/50ms
+    public static final  int VELOCIDADE = 2;
+    
     //Battlefield Constants --------------------------------------------------------------------------------------------
     public static final int BATTLEFIELD_X_DIM  = 15;
     public static final int BATTLEFIELD_Y_DIM  = 8;

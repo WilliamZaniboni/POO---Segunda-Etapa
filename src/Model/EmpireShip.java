@@ -16,7 +16,7 @@ public class EmpireShip extends SpaceIcon {
     public EmpireShip(int y_position){
         
         super((Constants.BATTLEFIELD_X_DIM-1), y_position, Constants.EMPIRESHIP_LIFE);
-        threadmove = new ThreadMove(y_position, this);
+        threadmove = new ThreadMove(super.getX_pixel());
         tr = new Thread(threadmove);
         tr.start();
         
@@ -62,8 +62,9 @@ public class EmpireShip extends SpaceIcon {
         return empire_ship_attack_matrix;
     }
     
-    public void setNewxposition(int i){
-        super.setY(i);
+    public void setNewxpixel_position(int i){
+        super.setX_pixel(i);
+       // if(super.getX_pixel()>)
         
     }
     
@@ -76,9 +77,9 @@ public class EmpireShip extends SpaceIcon {
         ImageIcon referencia4 = new ImageIcon("img/eticone.png"); //Inimigo
         Image nave4 = referencia4.getImage();
 
-        g.drawImage(nave4, squareWidth*super.getX()+327, squareWidth*super.getY()+87, null);
+        g.drawImage(nave4, super.getX_pixel(), squareWidth*super.getY()+87, null);
         
-        this.setNewxposition(threadmove.getY_position());
+        this.setNewxpixel_position(threadmove.getX_position());
         
         
     }

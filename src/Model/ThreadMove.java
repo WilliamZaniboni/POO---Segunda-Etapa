@@ -2,53 +2,45 @@
 package Model;
 
 
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ThreadMove implements Runnable {
     
-   private int y_position;
-   private  SpaceIcon inimigo;
+   private int x_pixel_position;
    
- 
-
-    public ThreadMove(int y, SpaceIcon inimigo) {
+    public ThreadMove(int x) {
         
-        this.y_position=y;
-        this.inimigo = inimigo;
+        this.x_pixel_position=x;
         
     }
     
-    public int getY_position() {
-        return y_position;
+    public int getX_position() {
+        return x_pixel_position;
     }
 
-    public void setY_position(int y_position) {
-        this.y_position = y_position;
+    public void setX_position(int x_position) {
+        this.x_pixel_position = x_position;
     }
     
    @Override
     public void run(){
         
-        int i = y_position;
+        int i = x_pixel_position;
         
         while(true){
            
             try {
-                Thread.sleep(1000);
+                Thread.sleep(50);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ThreadMove.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            i++;
+            i=i-Constants.VELOCIDADE;
             
-            this.setY_position(i);
+            this.setX_position(i);
             
-            System.out.println("A posição y é:"+i);
+            System.out.println("A posição x é:"+i);
         }
         
     }

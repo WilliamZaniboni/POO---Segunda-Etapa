@@ -4,6 +4,7 @@ import Controller.MenuController;
 import View.Informacoes;
 import View.Menu;
 import View.Menu_usuario;
+import View.Sound_menu;
 
 
 public class Main {
@@ -12,12 +13,13 @@ public class Main {
       java.awt.EventQueue.invokeLater(new Runnable(){
       public void run() {
           
-          //iniciando os menus
+          //iniciando os menus e o menu_controller
           Menu menu = new Menu();
           Menu_usuario menu_usuario = new Menu_usuario();
           Informacoes informacoes = new Informacoes();
-          MenuController menu_controller = new MenuController();
           
+          
+          MenuController menu_controller = new MenuController();
           
           //adicionando os controllers dos menus
           menu_controller.addMenu(menu);

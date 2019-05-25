@@ -23,7 +23,6 @@ package Controller;
 import Mathematics.BasicLinearAlgebra;
 import Model.*;
 import View.Canvas;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;

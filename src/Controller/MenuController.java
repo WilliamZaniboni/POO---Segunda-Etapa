@@ -8,6 +8,7 @@ import View.Environment;
 import View.Informacoes;
 import View.Menu;
 import View.Menu_usuario;
+import View.Sound_menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -20,6 +21,17 @@ public class MenuController implements  ActionListener,  ItemListener{
      private Menu menu;
      private Menu_usuario menu_usuario;
      private Informacoes informacoes;
+     private Sound_menu musica_de_fundo;
+     private Thread t;
+     
+     public MenuController(){
+             musica_de_fundo = new Sound_menu();
+             t = new Thread(musica_de_fundo);
+             t.start();
+             musica_de_fundo.play_Music_menu();
+     }
+     
+     
      
      public void addMenu(Menu menu){
             this.menu = menu;
@@ -85,9 +97,10 @@ public class MenuController implements  ActionListener,  ItemListener{
         public void starting_the_game(){
             
                //Cria o Model do Update
-              UpdateClass updater = new UpdateClass(); //Interface gráfica
+              UpdateClass updater = new UpdateClass(); 
               UpdateClass fight_updater = new UpdateClass();   
               
+              //adiciona o metodo que printa as naves
               DrawController drawcontroller = new DrawController();
                 
                //Cria o Controller do Environment - os eventos do jogo são tratados e distribuidos aqui
@@ -101,17 +114,24 @@ public class MenuController implements  ActionListener,  ItemListener{
                environment_controller.addView(environment_view);
 
                
-               
               //Roda o View
                environment_controller.runEnvironment();
                
+              //Inicia a thread que ira fazer o repaint do view 
               ThreadRepaint repaint = new ThreadRepaint(environment_view);
               Thread tr = new Thread(repaint);
               tr.start();
-               
+              
+               //
                environment_controller.set_time_thread();
                
                environment_controller.Start_Time_thread();
+               
+               //
+               
+               musica_de_fundo.stop_Music_menu();
+               musica_de_fundo.play_Music_game();
+               
                
                //fecha todos os menus abertos
                menu_usuario.dispose();

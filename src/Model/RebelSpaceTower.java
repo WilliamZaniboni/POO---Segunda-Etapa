@@ -1,5 +1,6 @@
 package Model;
 
+import View.Sound_explosion;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
@@ -7,10 +8,54 @@ import java.util.Observable;
 import javax.swing.ImageIcon;
 
 public class RebelSpaceTower extends SpaceIcon {
+    
+    private Sound_explosion sound;
+    private Thread tr2;
+    private ThreadExplosion explosion;
+    private Thread tr1;
+    private boolean verific_ja_ocorreu_a_animacao_explosao  = false;
+    private boolean verific_ja_ocorreu_o_som_da_explosão = false;
+    
+    //CONSTRUCTOR ==================================================================================================
 
     public RebelSpaceTower(int x_position, int y_position){
+        
         super(x_position, y_position, Constants.SPACE_TOWER_LIFE);
+        
+        //thread para controlar o gif de explosão
+        explosion = new ThreadExplosion();
+        tr1 = new Thread(explosion);
+        tr1.start();
+        
+        //thread para o som
+        sound = new Sound_explosion();
+        tr2 = new Thread(sound);
+        tr2.start();
+        
     }
+    
+    //GETTERS =======================================================================================================
+    
+    public boolean isVerific_ja_ocorreu_a_animacao_explosao() {
+        return verific_ja_ocorreu_a_animacao_explosao;
+    }
+
+    public boolean isVerific_ja_ocorreu_o_som_da_explosão() {
+        return verific_ja_ocorreu_o_som_da_explosão;
+    }
+    
+    //SETTERS =======================================================================================================
+
+    public void setVerific_ja_ocorreu_a_animacao_explosao(boolean verific_ja_ocorreu_a_animacao_explosao) {
+        this.verific_ja_ocorreu_a_animacao_explosao = verific_ja_ocorreu_a_animacao_explosao;
+    }
+
+    public void setVerific_ja_ocorreu_o_som_da_explosão(boolean verific_ja_ocorreu_o_som_da_explosão) {
+        this.verific_ja_ocorreu_o_som_da_explosão = verific_ja_ocorreu_o_som_da_explosão;
+    }
+    
+    //METHODS =======================================================================================================
+
 
     @Override
     public void Move(Battlefield battlefield){
@@ -36,7 +81,42 @@ public class RebelSpaceTower extends SpaceIcon {
         
         ImageIcon referencia1 = new ImageIcon("img/nave1icone.png"); //SpaceTower
         Image nave1 = referencia1.getImage();
+        
+        
+        //verifica se esta vivo e desenha a nave
+        
+        if(super.isIsAlive() == true){  
+            
+          g.drawImage(nave1, squareWidth*super.getX()+327, squareWidth*super.getY()+87, null);
+        
+        }
+        
+        //caso esteja morto e não tenha ocorrido a animação, desenha a animação de explosao
+        if(super.isIsAlive() == false && this.verific_ja_ocorreu_a_animacao_explosao == false){
+          
+        //inicia o efeito sonoro   
+        if(this.verific_ja_ocorreu_o_som_da_explosão == false){
+            
+            sound.play_Music();
+            this.setVerific_ja_ocorreu_o_som_da_explosão(true);
+            
+        }  
+          
+        ImageIcon referencia5 = new ImageIcon("img/explosao.gif"); //Explosao
+        Image explosao = referencia5.getImage();
+        
+        
         g.drawImage(nave1, squareWidth*super.getX()+327, squareWidth*super.getY()+87, null);
+        g.drawImage(explosao, squareWidth*super.getX()+327, squareWidth*super.getY()+87, null);
+        
+        explosion.setStop_thread(true); 
+        explosion.setRebelisDead(true);
+        
+        this.setVerific_ja_ocorreu_a_animacao_explosao(explosion.isVerific());
+        
+        
+      }
+        
         
     }
 

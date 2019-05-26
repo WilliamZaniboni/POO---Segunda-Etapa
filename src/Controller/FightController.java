@@ -78,7 +78,7 @@ public class FightController implements Observer {
                 return empire;
             }
             
-        //teste
+        //atualiza o drawingController
             
         public void setdrawingController(){
             

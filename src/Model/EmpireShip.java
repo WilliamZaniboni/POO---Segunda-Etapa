@@ -12,7 +12,6 @@ public class EmpireShip extends SpaceIcon {
     private Sound_explosion sound;
     private Thread tr2;
     private int verific[] = new int[15]; 
-    private boolean isAlive;
     private boolean verific_ja_ocorreu_a_animacao_explosao  = false;
     private boolean verific_ja_ocorreu_o_som_da_explosão = false;
     
@@ -23,7 +22,7 @@ public class EmpireShip extends SpaceIcon {
         
         super((Constants.BATTLEFIELD_X_DIM-1), y_position, Constants.EMPIRESHIP_LIFE);
         
-        //thread para movimentação da nava
+        //thread para movimentação da nave
         threadmove = new ThreadMove(super.getX_pixel());
         tr = new Thread(threadmove);
         tr.start();
@@ -36,15 +35,9 @@ public class EmpireShip extends SpaceIcon {
         //vetor de verificação
         for ( int k=0; k<14; k++) verific[k] = 0; 
         
-        isAlive = true;
-        
     }
     
     //Getters ======================================================================================================================
-    
-    public boolean isIsAlive() {
-        return isAlive;
-    }
     
     public boolean isVerific_ja_ocorreu_a_animacao_explosao() {
         return verific_ja_ocorreu_a_animacao_explosao;
@@ -54,13 +47,7 @@ public class EmpireShip extends SpaceIcon {
         return verific_ja_ocorreu_o_som_da_explosão;
     }
     
-    
-    
     //Setters ======================================================================================================================
-
-    public void setIsAlive(boolean isAlive) {
-        this.isAlive = isAlive;
-    }
 
     public void setVerific_ja_ocorreu_a_animacao_explosao(boolean verific_ja_ocorreu_a_animacao_explosao) {
         this.verific_ja_ocorreu_a_animacao_explosao = verific_ja_ocorreu_a_animacao_explosao;
@@ -69,7 +56,6 @@ public class EmpireShip extends SpaceIcon {
     public void setVerific_ja_ocorreu_o_som_da_explosão(boolean verific_ja_ocorreu_o_som_da_explosão) {
         this.verific_ja_ocorreu_o_som_da_explosão = verific_ja_ocorreu_o_som_da_explosão;
     }
-    
     
     
     public void setNewxpixel_position(int i){
@@ -132,7 +118,7 @@ public class EmpireShip extends SpaceIcon {
         }
         if(super.getX_pixel()<331){
             threadmove.setStop_flag(1);
-            this.setIsAlive(false);
+            super.setIsAlive(false);
         }
         
         
@@ -189,7 +175,7 @@ public class EmpireShip extends SpaceIcon {
       Image nave4 = referencia4.getImage();
      
       //verifica se esta vivo e desenha a nave
-      if(isAlive == true){  
+      if(super.isIsAlive() == true){  
         
         g.drawImage(nave4, super.getX_pixel(), squareWidth*super.getY()+87, null);
         
@@ -197,7 +183,7 @@ public class EmpireShip extends SpaceIcon {
       }
       
       //caso esteja morto e não tenha ocorrido a animação, desenha a animação de explosao
-      if(isAlive==false && this.verific_ja_ocorreu_a_animacao_explosao == false){
+      if(super.isIsAlive() ==false && this.verific_ja_ocorreu_a_animacao_explosao == false){
           
         //inicia o efeito sonoro   
         if(this.verific_ja_ocorreu_o_som_da_explosão == false){
@@ -207,7 +193,7 @@ public class EmpireShip extends SpaceIcon {
             
         }  
           
-        ImageIcon referencia5 = new ImageIcon("img/explosao.gif"); //Inimigo
+        ImageIcon referencia5 = new ImageIcon("img/explosao.gif"); //Explosao
         Image explosao = referencia5.getImage();
         
         

@@ -25,6 +25,7 @@ public class MenuController implements  ActionListener,  ItemListener{
      private Thread t;
      
      public MenuController(){
+         
              musica_de_fundo = new Sound_menu();
              t = new Thread(musica_de_fundo);
              t.start();

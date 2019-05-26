@@ -3,7 +3,7 @@ package Model;
 public class Constants {
     
     //Gold inicial
-    public static final int GOLD_INIT = 10000;
+    public static final int GOLD_INIT = 20000;
     
     //Tempo de inclusão das naves
     public static final int TIME = 10;

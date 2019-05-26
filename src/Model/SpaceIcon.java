@@ -1,8 +1,9 @@
 package Model;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
-public abstract class SpaceIcon implements SpaceFighter {
+public abstract class SpaceIcon implements SpaceFighter, Serializable{
 
     private int x;
     private int y;

@@ -1,19 +1,20 @@
 package Model;
 
 import View.Menu_usuario;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable {
     
-    private int gold;
     private String name;
     private int save_time;
     private Menu_usuario menu_usuario;
+    private int gold =  Constants.GOLD_INIT; 
     
     //Contrutor==================================================================
     
     public Player(Menu_usuario menu_usuario){
         
-        this.gold = Constants.GOLD_INIT; 
+        
         this.name = menu_usuario.getPlayerName();
         
         //compara a String e tranforma em segundos (adicionar try catch caso nao clique em nada
@@ -66,8 +67,5 @@ public class Player {
     public void setSave_time(int save_time) {
         this.save_time = save_time;
     }
-    
-    
-    
     
 }

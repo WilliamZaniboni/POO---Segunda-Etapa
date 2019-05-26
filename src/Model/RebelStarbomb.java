@@ -9,10 +9,10 @@ import javax.swing.ImageIcon;
 
 public class RebelStarbomb extends SpaceIcon{
     
-    private Sound_explosion sound;
-    private Thread tr2;
-    private ThreadExplosion explosion;
-    private Thread tr1;
+    private transient Sound_explosion sound;
+    private transient Thread tr2;
+    private transient ThreadExplosion explosion;
+    private transient Thread tr1;
     private boolean verific_ja_ocorreu_a_animacao_explosao  = false;
     private boolean verific_ja_ocorreu_o_som_da_explosão = false;
     

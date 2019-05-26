@@ -260,9 +260,6 @@ public class Environment extends javax.swing.JFrame implements Observer {
         return j;
     }
 
-    public void drawSpaceIcon(Graphics2D g, FightController fightController){
-
-    }
 
     public void drawMouseQuadrante(Graphics2D g, FightController fightController) { //desenha um quadrado ao redor dos quadrantesc
 

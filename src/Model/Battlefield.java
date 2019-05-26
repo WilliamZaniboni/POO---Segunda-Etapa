@@ -1,6 +1,8 @@
 package Model;
 
-public class Battlefield {
+import java.io.Serializable;
+
+public class Battlefield implements Serializable {
 
     private int width;
     private int height;

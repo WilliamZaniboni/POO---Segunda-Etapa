@@ -43,6 +43,8 @@ public class FightController implements Observer {
         private Random random;
         private DrawController drawcontroller;
         private Canvas canvas;
+        private ThreadSave save;
+        private Thread thread;
 
     //CONSTRUCTOR ======================================================================================================
         public FightController(Battlefield battlefield, Player player, DrawController drawcontroller) {
@@ -50,7 +52,29 @@ public class FightController implements Observer {
             this.player = player;
             this.drawcontroller = drawcontroller;
             random = new Random();
+            
+            //inicia a thread para save automático
+            save = new ThreadSave(player.getSave_time());
+            thread = new Thread(save);
+            thread.start();
+            
         }
+        
+        public FightController(Battlefield battlefield, Player player, DrawController drawcontroller, ArrayList <SpaceIcon> rebels, ArrayList <SpaceIcon> empire ) {
+            this.battlefield = battlefield;
+            this.player = player;
+            this.drawcontroller = drawcontroller;
+            this.rebels = rebels;
+            this.empire = empire;
+            random = new Random();
+            
+            //inicia a thread para save automático
+            save = new ThreadSave(player.getSave_time());
+            thread = new Thread(save);
+            thread.start();
+        }
+        
+        
        
 
     //METHODS ==========================================================================================================
@@ -77,6 +101,8 @@ public class FightController implements Observer {
             public ArrayList<SpaceIcon> getEmpire() {
                 return empire;
             }
+
+          
             
         //atualiza o drawingController
             
@@ -249,6 +275,16 @@ public class FightController implements Observer {
                 int newEmpireshipPosition = 9;
                 this.moveEmpireShips();
                 this.cycle_interaction();
+                
+                //////////////////
+                
+                save.setPlayer(player);
+                save.setEmpire(empire);
+                save.setRebels(rebels);
+                save.setBattlefield(battlefield);
+                
+                //////////////////
+                
                 this.cycle++;
                 newEmpireshipPosition = this.generateEmpireArmy();
                 if(newEmpireshipPosition < 8){

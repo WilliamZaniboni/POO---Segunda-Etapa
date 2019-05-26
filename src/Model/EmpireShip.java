@@ -7,11 +7,11 @@ import javax.swing.ImageIcon;
 
 public class EmpireShip extends SpaceIcon {
     
-    private ThreadMove threadmove;
-    private Thread tr;
-    private Sound_explosion sound;
-    private Thread tr2;
-    private int verific[] = new int[15]; 
+    private transient ThreadMove threadmove;
+    private transient Thread tr;
+    private transient Sound_explosion sound;
+    private transient Thread tr2;
+    private int verific[] = new int[14]; 
     private boolean verific_ja_ocorreu_a_animacao_explosao  = false;
     private boolean verific_ja_ocorreu_o_som_da_explosão = false;
     
@@ -64,57 +64,61 @@ public class EmpireShip extends SpaceIcon {
         super.setX_pixel(i);
         
         //atualiza o valor do quadrante
-        if(super.getX_pixel()<1026 && super.getX_pixel() >=972 && this.verific[14]==0){
-           super.setX(super.getX()-1);  
-           this.verific[14] = 1;
-        }
-        if(super.getX_pixel()<972 && super.getX_pixel() >=918 && this.verific[13]==0 ){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<1080 && super.getX_pixel() >=1026 && this.verific[13]==0){
+           super.setX(13);  
            this.verific[13] = 1;
         }
-        if(super.getX_pixel()<918 && super.getX_pixel() >=864 && this.verific[12]==0){
-           super.setX(super.getX()-1); 
-           this.verific[12] = 1; 
+        if(super.getX_pixel()<1026 && super.getX_pixel() >=972 && this.verific[12]==0){
+           super.setX(12);  
+           this.verific[12] = 1;
         }
-        if(super.getX_pixel()<864 && super.getX_pixel() >=813 && this.verific[11]==0){
-           super.setX(super.getX()-1); 
-           this.verific[11] = 1; 
+        if(super.getX_pixel()<972 && super.getX_pixel() >=918 && this.verific[11]==0 ){
+           super.setX(11); 
+           this.verific[11] = 1;
         }
-        if(super.getX_pixel()<813 && super.getX_pixel() >=759 && this.verific[9]==0){
-           super.setX(super.getX()-1); 
-           this.verific[9] = 1;
+        if(super.getX_pixel()<918 && super.getX_pixel() >=864 && this.verific[10]==0){
+           super.setX(10); 
+           this.verific[10] = 1; 
         }
-        if(super.getX_pixel()<759 && super.getX_pixel() >=705 && this.verific[8]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<864 && super.getX_pixel() >=813 && this.verific[9]==0){
+           super.setX(9); 
+           this.verific[9] = 1; 
+        }
+        if(super.getX_pixel()<813 && super.getX_pixel() >=759 && this.verific[8]==0){
+           super.setX(8); 
            this.verific[8] = 1;
         }
-        if(super.getX_pixel()<705 && super.getX_pixel() >=651 && this.verific[7]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<759 && super.getX_pixel() >=705 && this.verific[7]==0){
+           super.setX(7); 
            this.verific[7] = 1;
         }
-        if(super.getX_pixel()<651 && super.getX_pixel() >=597 && this.verific[6]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<705 && super.getX_pixel() >=651 && this.verific[6]==0){
+           super.setX(6); 
            this.verific[6] = 1;
         }
-        if(super.getX_pixel()<597 && super.getX_pixel() >=543 && this.verific[5]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<651 && super.getX_pixel() >=597 && this.verific[5]==0){
+           super.setX(5); 
            this.verific[5] = 1;
         }
-        if(super.getX_pixel()<543 && super.getX_pixel() >=489 && this.verific[4]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<597 && super.getX_pixel() >=543 && this.verific[4]==0){
+           super.setX(4); 
            this.verific[4] = 1;
         }
-        if(super.getX_pixel()<489 && super.getX_pixel() >=435 && this.verific[3]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<543 && super.getX_pixel() >=489 && this.verific[3]==0){
+           super.setX(3); 
            this.verific[3] = 1;
         }
-        if(super.getX_pixel()<435 && super.getX_pixel() >=381 && this.verific[2]==0){
-           super.setX(super.getX()-1); 
+        if(super.getX_pixel()<489 && super.getX_pixel() >=435 && this.verific[2]==0){
+           super.setX(2); 
            this.verific[2] = 1;
         }
-        if(super.getX_pixel()<381 && super.getX_pixel() >=327 && this.verific[1]==0){
-           super.setX(super.getX()-1); 
-           this.verific[1] = 1;   
+        if(super.getX_pixel()<435 && super.getX_pixel() >=381 && this.verific[1]==0){
+           super.setX(1); 
+           this.verific[1] = 1;
+        }
+        if(super.getX_pixel()<381 && super.getX_pixel() >=327 && this.verific[0]==0){
+           super.setX(0); 
+           this.verific[0] = 1;   
         }
         if(super.getX_pixel()<331){
             threadmove.setStop_flag(1);

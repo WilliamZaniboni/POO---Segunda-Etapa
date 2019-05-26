@@ -43,7 +43,7 @@ public class ThreadTimer implements Runnable {
         
         //adicionando a fonte do texto
         try {
-                Font fonte_digital = Font.createFont(Font.TRUETYPE_FONT, new File("img/ds_digital/DS-DIGI.ttf")).deriveFont(Font.PLAIN, 47);
+                Font fonte_digital = Font.createFont(Font.TRUETYPE_FONT, new File("img/DS-DIGI.ttf")).deriveFont(Font.PLAIN, 47);
                 jlabel.setFont(fonte_digital);
             } catch (FontFormatException ex) {
                 Logger.getLogger(ThreadTimer.class.getName()).log(Level.SEVERE, null, ex);

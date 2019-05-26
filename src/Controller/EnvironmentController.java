@@ -15,6 +15,7 @@ import java.util.Observer;
 import Model.Battlefield;
 import Model.Constants;
 import Model.Player;
+import Model.SpaceIcon;
 import Model.ThreadTimer;
 import Model.UpdateClass;
 import View.Canvas;
@@ -40,6 +41,7 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
         private Menu_usuario menu_usuario;
         private DrawController drawcontroller;
         private Canvas canvas;
+        private Player player;
         
   
     //CONSTRUCTOR ======================================================================================================
@@ -50,9 +52,18 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
             Player player = new Player(menu_usuario);
             this.drawcontroller = drawcontroller;
             fightController = new FightController(battlefield, player, drawcontroller );
-            this.registerObserver(fightController);
-            
+            this.registerObserver(fightController);      
     }
+    
+    public EnvironmentController(DrawController drawcontroller, Player player, Battlefield battlefield, ArrayList <SpaceIcon> rebels, ArrayList <SpaceIcon> empire) {
+        //Constrói a infraestrutura de luta dentro do jogo -------------------------------------------------------------
+            this.battlefield = battlefield;
+            this.player = player;
+            this.drawcontroller = drawcontroller;
+            fightController = new FightController(battlefield, player, drawcontroller, rebels, empire);
+            this.registerObserver(fightController);      
+    }
+    
     
 
     //METHODS ==========================================================================================================

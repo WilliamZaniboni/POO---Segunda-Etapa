@@ -48,6 +48,7 @@ public class FightController implements Observer {
 
     //CONSTRUCTOR ======================================================================================================
         public FightController(Battlefield battlefield, Player player, DrawController drawcontroller) {
+            
             this.battlefield = battlefield;
             this.player = player;
             this.drawcontroller = drawcontroller;
@@ -60,13 +61,27 @@ public class FightController implements Observer {
             
         }
         
+        
+        //Construtor utilizado a partir do arquivo de save
         public FightController(Battlefield battlefield, Player player, DrawController drawcontroller, ArrayList <SpaceIcon> rebels, ArrayList <SpaceIcon> empire ) {
+            
             this.battlefield = battlefield;
             this.player = player;
             this.drawcontroller = drawcontroller;
             this.rebels = rebels;
             this.empire = empire;
             random = new Random();
+            
+            //inicia as threads das naves
+            
+            for(SpaceIcon p : empire){
+                  p.setThreads();
+             }
+            
+            for(SpaceIcon p : rebels){
+                  p.setThreads();
+             }
+            
             
             //inicia a thread para save automático
             save = new ThreadSave(player.getSave_time());

@@ -57,6 +57,19 @@ public class EmpireShip extends SpaceIcon {
         this.verific_ja_ocorreu_o_som_da_explosão = verific_ja_ocorreu_o_som_da_explosão;
     }
     
+    @Override
+    public void setThreads(){
+        
+        threadmove = new ThreadMove(super.getX_pixel());
+        tr = new Thread(threadmove);
+        tr.start();
+        
+        sound = new Sound_explosion();
+        tr2 = new Thread(sound);
+        tr2.start();
+        
+    }
+    
     
     public void setNewxpixel_position(int i){
         

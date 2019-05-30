@@ -66,6 +66,7 @@ public abstract class SpaceIcon implements SpaceFighter, Serializable{
         this.isAlive = isAlive;
     }
     
+    public abstract void setThreads();
 
     //METHODS ============================================================================================================
     

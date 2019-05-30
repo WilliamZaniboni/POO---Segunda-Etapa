@@ -39,17 +39,12 @@ public class ThreadSave implements Runnable {
 
     //SETTERS =====================================================================================
     
-    
-    public void setSave_time(int save_time) {
-        
-        this.save_time = save_time;
-        
+    public void setSave_time(int save_time) {   
+        this.save_time = save_time;  
     }
 
-    public void setPlayer(Player player) {
-        
+    public void setPlayer(Player player) { 
         this.player = player;
-        
     }
 
     public void setRebels(ArrayList<SpaceIcon> rebels) {
@@ -63,8 +58,6 @@ public class ThreadSave implements Runnable {
     public void setBattlefield(Battlefield battlefield) {
         this.battlefield = battlefield;
     }
-    
-    
     
     
     //METHODS =====================================================================================
@@ -84,10 +77,10 @@ public class ThreadSave implements Runnable {
             System.out.println("SALVO");
             
             try {
-                arquivoSave1 = new FileOutputStream("img/saves/player_save.txt");
-                arquivoSave2 = new FileOutputStream("img/saves/rebels_save.txt");
-                arquivoSave3 = new FileOutputStream("img/saves/empire_save.txt");
-                arquivoSave4 = new FileOutputStream("img/saves/battlefield_save.txt");
+                arquivoSave1 = new FileOutputStream("img/saves/player_save.bin");
+                arquivoSave2 = new FileOutputStream("img/saves/rebels_save.bin");
+                arquivoSave3 = new FileOutputStream("img/saves/empire_save.bin");
+                arquivoSave4 = new FileOutputStream("img/saves/battlefield_save.bin");
                 
             } catch (FileNotFoundException ex) {
                  Logger.getLogger(ThreadSave.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,7 +94,6 @@ public class ThreadSave implements Runnable {
             } catch (IOException ex) {
                  Logger.getLogger(ThreadSave.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
             
             try {
                 objGravar1.writeObject(player);
@@ -120,6 +112,7 @@ public class ThreadSave implements Runnable {
             } catch (IOException ex) {
                 Logger.getLogger(ThreadSave.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             try {
                 objGravar1.close();
                 objGravar2.close();
@@ -137,6 +130,7 @@ public class ThreadSave implements Runnable {
             } catch (IOException ex) {
                 Logger.getLogger(ThreadSave.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             try {
                 arquivoSave1.close();
                 arquivoSave2.close();

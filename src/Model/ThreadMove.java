@@ -2,10 +2,11 @@
 package Model;
 
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ThreadMove implements Runnable {
+public class ThreadMove implements Runnable{
     
    private int x_pixel_position;
    private int stop_flag;

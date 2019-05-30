@@ -19,6 +19,7 @@ public class RebelStarship extends SpaceIcon{
     //CONSTRUCTOR ===================================================================================================
 
     public RebelStarship(int x_position, int y_position){
+        
         super(x_position, y_position, Constants.STARSHIP_LIFE);
         
         //thread para controlar o gif de explosão
@@ -30,6 +31,7 @@ public class RebelStarship extends SpaceIcon{
         sound = new Sound_explosion();
         tr2 = new Thread(sound);
         tr2.start();
+        
     }
     
     //GETTERS =======================================================================================================
@@ -50,6 +52,21 @@ public class RebelStarship extends SpaceIcon{
 
     public void setVerific_ja_ocorreu_o_som_da_explosão(boolean verific_ja_ocorreu_o_som_da_explosão) {
         this.verific_ja_ocorreu_o_som_da_explosão = verific_ja_ocorreu_o_som_da_explosão;
+    }
+    
+    @Override
+    public void setThreads(){
+        
+        //thread para controlar o gif de explosão
+        explosion = new ThreadExplosion();
+        tr1 = new Thread(explosion);
+        tr1.start();
+        
+        //thread para o som
+        sound = new Sound_explosion();
+        tr2 = new Thread(sound);
+        tr2.start();
+        
     }
     
     //METHODS =======================================================================================================

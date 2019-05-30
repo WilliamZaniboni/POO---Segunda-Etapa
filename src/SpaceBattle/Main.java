@@ -16,8 +16,6 @@ public class Main {
           Menu menu = new Menu();
           Menu_usuario menu_usuario = new Menu_usuario();
           Informacoes informacoes = new Informacoes();
-          
-          
           MenuController menu_controller = new MenuController();
           
           //adicionando os controllers dos menus

@@ -18,10 +18,9 @@ public class Sound_explosion implements Runnable{
          this.Music.play();
     }
     
-    
+    //sem implmentação
     @Override
-    public void run() {
-        
+    public void run() {  
     }
     
     

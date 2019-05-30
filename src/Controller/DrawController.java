@@ -14,12 +14,16 @@ public class DrawController implements Observer{
      private ArrayList <SpaceIcon> empire = new ArrayList();
      
      
+    //SETTERS ========================================================================================= 
+     
     public void setArrayList(ArrayList <SpaceIcon> rebels, ArrayList <SpaceIcon> empire){
         
         this.rebels = rebels;
         this.empire = empire;
         
     } 
+    
+    //METHODS =========================================================================================
     
     public void draw(Graphics2D g){
         //desenha as naves aliadas

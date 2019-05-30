@@ -19,22 +19,30 @@ public class ThreadTimer implements Runnable {
    private Environment environment;
    private Font fonte_digital;
    private int flag=0;
+   
+   
  
-
+    //CONSTRUCTOR =============================================================================
+   
     public ThreadTimer(JLabel label, FightController fightController, Environment environment) {
         this.jlabel = label;
         this.fightController = fightController;
         this.environment = environment;
     }
     
+    //SETTERS =================================================================================
+    
     public void set_flag(int x){
         this.flag = x;
     }
+    
+    //GETTERS =================================================================================
     
     public int get_flag(){
         return this.flag;
     }
 
+    //METHODS ================================================================================
     
    @Override
     public void run(){

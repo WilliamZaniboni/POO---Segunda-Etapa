@@ -55,6 +55,21 @@ public class RebelStarbomb extends SpaceIcon{
         this.verific_ja_ocorreu_o_som_da_explosão = verific_ja_ocorreu_o_som_da_explosão;
     }
     
+    @Override
+    public void setThreads(){
+        
+        //thread para controlar o gif de explosão
+        explosion = new ThreadExplosion();
+        tr1 = new Thread(explosion);
+        tr1.start();
+        
+        //thread para o som
+        sound = new Sound_explosion();
+        tr2 = new Thread(sound);
+        tr2.start();
+        
+    }
+    
     //METHODS =======================================================================================================
 
     @Override

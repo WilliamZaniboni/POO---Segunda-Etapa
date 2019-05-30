@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.JOptionPane;
 
 
 public class MenuController implements  ActionListener,  ItemListener{
@@ -25,6 +24,9 @@ public class MenuController implements  ActionListener,  ItemListener{
      private Sound_menu musica_de_fundo;
      private Thread t;
      
+     
+     //CONSTRUCTOR ===============================================================================================
+     
      public MenuController(){
          
              musica_de_fundo = new Sound_menu();
@@ -33,7 +35,7 @@ public class MenuController implements  ActionListener,  ItemListener{
              musica_de_fundo.play_Music_menu();
      }
      
-     
+     //METHODS ADD CONTROLLER ======================================================================================
      
      public void addMenu(Menu menu){
             this.menu = menu;
@@ -51,6 +53,7 @@ public class MenuController implements  ActionListener,  ItemListener{
             menu.setVisible(true);      
         }
      
+     //METHODS PARA LER AS AÇÕES DOS BOTÕES ==========================================================================
         
          @Override
         public void actionPerformed(ActionEvent ae) {
@@ -140,56 +143,7 @@ public class MenuController implements  ActionListener,  ItemListener{
             }
             
         }
-        
-        
-        //inicia o jogo
-        public void starting_the_game(){
-            
-               //Cria o Model do Update
-              UpdateClass updater = new UpdateClass(); 
-              UpdateClass fight_updater = new UpdateClass();   
-              
-              //adiciona o metodo que printa as naves
-              DrawController drawcontroller = new DrawController();
-                
-               //Cria o Controller do Environment - os eventos do jogo são tratados e distribuidos aqui
-              EnvironmentController environment_controller = new EnvironmentController(menu_usuario, drawcontroller);
-              
-              //Cria a View do Environment (Painel de jogo)
-               Environment environment_view = new Environment(updater, environment_controller.getFightController(), drawcontroller);
-               
-              //Conecta os Controller ao respectivo View
-               environment_view.addController(environment_controller);
-               environment_controller.addView(environment_view);
-
-               
-              //Roda o View
-               environment_controller.runEnvironment();
-               
-              //Inicia a thread que ira fazer o repaint do view 
-              ThreadRepaint repaint = new ThreadRepaint(environment_view);
-              Thread tr = new Thread(repaint);
-              tr.start();
-              
-               //
-               environment_controller.set_time_thread();
-               
-               environment_controller.Start_Time_thread();
-               
-               //
-               
-               musica_de_fundo.stop_Music_menu();
-               musica_de_fundo.play_Music_game();
-               
-               
-               //fecha todos os menus abertos
-               menu_usuario.dispose();
-               informacoes.dispose();
-                
-        }
-        
-        
-
+       
     @Override
     public void itemStateChanged(ItemEvent ie) {
         
@@ -200,6 +154,53 @@ public class MenuController implements  ActionListener,  ItemListener{
         }
         
     }
+    
+    
+    //METHODS ============================================================================================================
+     
+        //inicia o jogo
+        public void starting_the_game(){
+            
+               //Cria o Model do Update
+               UpdateClass updater = new UpdateClass(); 
+               UpdateClass fight_updater = new UpdateClass();   
+               
+               //adiciona o metodo que printa as naves
+               DrawController drawcontroller = new DrawController();
+                
+               //Cria o Controller do Environment - os eventos do jogo são tratados e distribuidos aqui
+               EnvironmentController environment_controller = new EnvironmentController(menu_usuario, drawcontroller);
+              
+               //Cria a View do Environment (Painel de jogo)
+               Environment environment_view = new Environment(updater, environment_controller.getFightController(), drawcontroller);
+               
+               //Conecta os Controller ao respectivo View
+               environment_view.addController(environment_controller);
+               environment_controller.addView(environment_view);
+
+              //Roda o View
+               environment_controller.runEnvironment();
+               
+               //Inicia a thread que ira fazer o repaint do view 
+               ThreadRepaint repaint = new ThreadRepaint(environment_view);
+               Thread tr = new Thread(repaint);
+               tr.start();
+              
+               //controller do timer
+               environment_controller.set_time_thread();
+               environment_controller.Start_Time_thread();
+               
+               //controla a música de fundo
+               musica_de_fundo.stop_Music_menu();
+               musica_de_fundo.play_Music_game();
+               
+               
+               //fecha todos os menus abertos
+               menu_usuario.dispose();
+               informacoes.dispose();
+                
+        }
+        
     
     
 }

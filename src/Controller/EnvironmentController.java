@@ -55,6 +55,8 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
             this.registerObserver(fightController);      
     }
     
+    
+    //CONsTRUTOR utilizado para a partir do arquivo de save
     public EnvironmentController(DrawController drawcontroller, Player player, Battlefield battlefield, ArrayList <SpaceIcon> rebels, ArrayList <SpaceIcon> empire) {
         //Constrói a infraestrutura de luta dentro do jogo -------------------------------------------------------------
             this.battlefield = battlefield;
@@ -113,17 +115,12 @@ public class EnvironmentController implements MouseListener, MouseMotionListener
                 int quadrantey = (y - 94)/54;
                 boolean isPossible;
 
-                
-               
-                    
                     if(flag_for_rebel_choice != 0){
                         this.last_x_quad = quadrantex;
                         this.last_y_quad = quadrantey;
                         this.updating_mode = 0;
                         fightController.update(null, this);
                     }
-
-
 
                 flag_for_rebel_choice = 0;
 

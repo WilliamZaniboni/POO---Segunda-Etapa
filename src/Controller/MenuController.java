@@ -77,53 +77,63 @@ public class MenuController implements  ActionListener,  ItemListener{
             //Botão de continuar selecionado
             if( ae.getSource() == menu.getContinue_thegame()){
                 
-                //fecha todos os menus abertos
-                   
-                   menu_usuario.dispose();
-                   informacoes.dispose();
-                
                 OpenSave open = new OpenSave();
                 
-                 //Cria o Model do Update
-                  UpdateClass updater = new UpdateClass(); 
-                  UpdateClass fight_updater = new UpdateClass();   
-              
-                 //adiciona o metodo que printa as naves
-                   DrawController drawcontroller = new DrawController();
-                   
-                   drawcontroller.setArrayList(open.getRebels(), open.getEmpire());
+                //caso tenha encontrado o arquivo de save
+                if(open.isArquivo_encontrado() == true){
+                    
+                      //fecha todos os menus abertos
+                        menu_usuario.dispose();
+                        informacoes.dispose();
                 
-                 //Cria o Controller do Environment - os eventos do jogo são tratados e distribuidos aqui
-                   EnvironmentController environment_controller = new EnvironmentController(drawcontroller, open.getPlayer(), open.getBattlefield(), open.getRebels(), open.getEmpire());
+                      //Cria o Model do Update
+                        UpdateClass updater = new UpdateClass(); 
+                        UpdateClass fight_updater = new UpdateClass();   
               
-                 //Cria a View do Environment (Painel de jogo)
-                   Environment environment_view = new Environment(updater, environment_controller.getFightController(), drawcontroller);
+                      //adiciona o metodo que printa as naves
+                        DrawController drawcontroller = new DrawController();
                    
-                   environment_view.getjLabel8().setText(""+open.getPlayer().getGold());
+                        drawcontroller.setArrayList(open.getRebels(), open.getEmpire());
+                
+                      //Cria o Controller do Environment - os eventos do jogo são tratados e distribuidos aqui
+                        EnvironmentController environment_controller = new EnvironmentController(drawcontroller, open.getPlayer(), open.getBattlefield(), open.getRebels(), open.getEmpire());
+              
+                      //Cria a View do Environment (Painel de jogo)
+                        Environment environment_view = new Environment(updater, environment_controller.getFightController(), drawcontroller);
+                   
+                      //Atualiza o valor do gold  
+                        environment_view.getjLabel8().setText(""+open.getPlayer().getGold());
                
-                 //Conecta os Controller ao respectivo View
-                   environment_view.addController(environment_controller);
-                   environment_controller.addView(environment_view);
+                      //Conecta os Controller ao respectivo View
+                        environment_view.addController(environment_controller);
+                        environment_controller.addView(environment_view);
 
-                 //Roda o View
-                   environment_controller.runEnvironment();
+                      //Roda o View
+                        environment_controller.runEnvironment();
                
-                 //Inicia a thread que ira fazer o repaint do view 
-                   ThreadRepaint repaint = new ThreadRepaint(environment_view);
-                   Thread tr = new Thread(repaint);
-                   tr.start();
+                      //Inicia a thread que ira fazer o repaint do view 
+                        ThreadRepaint repaint = new ThreadRepaint(environment_view);
+                        Thread tr = new Thread(repaint);
+                        tr.start();
               
-                  //
-                  environment_controller.set_time_thread();
+                      //Controla a thread do relogio
+                         environment_controller.set_time_thread();
+                         environment_controller.Start_Time_thread();
                
-                  environment_controller.Start_Time_thread();
-               
-                 //
-                   menu.dispose(); 
-                   musica_de_fundo.stop_Music_menu();
-                   
-                   musica_de_fundo.play_Music_game();
-               
+                      //Fecha o menu e inicia a musica do game
+                         menu.dispose(); 
+                         musica_de_fundo.stop_Music_menu();
+                         musica_de_fundo.play_Music_game();
+                }
+                
+                else{
+                    
+                    System.out.println("Entrei no else");
+                    
+                    menu_usuario.setVisible(true);
+                    menu.dispose(); 
+                    
+                }
                 
             }
             

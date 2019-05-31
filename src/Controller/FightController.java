@@ -291,12 +291,10 @@ public class FightController implements Observer {
                 this.moveEmpireShips();
                 this.cycle_interaction();
                 
+                //atualiza o arquivo de save
                 //////////////////
                 
-                save.setPlayer(player);
-                save.setEmpire(empire);
-                save.setRebels(rebels);
-                save.setBattlefield(battlefield);
+                save.setArrayList_save(player, rebels, empire, battlefield);
                 
                 //////////////////
                 

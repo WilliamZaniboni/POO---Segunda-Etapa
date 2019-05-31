@@ -15,88 +15,64 @@ public class OpenSave {
     
     private FileInputStream arquivoLeitura1;      
     private ObjectInputStream objLeitura1;
-    private FileInputStream arquivoLeitura2;      
-    private ObjectInputStream objLeitura2;
-    private FileInputStream arquivoLeitura3;      
-    private ObjectInputStream objLeitura3;
-    private FileInputStream arquivoLeitura4;      
-    private ObjectInputStream objLeitura4;
+    
+    private ArrayList <Object> save_list = new ArrayList();
     
     private Player player;
     private ArrayList <SpaceIcon> rebels = new ArrayList();
     private ArrayList <SpaceIcon> empire = new ArrayList();
     private Battlefield battlefield;
     
+    private boolean arquivo_encontrado;
+    
+    //CONSTRUCTOR =======================================================================================================================
     
     public OpenSave(){
         
+        this.arquivo_encontrado = true;
+        
         try {
-            arquivoLeitura1 = new FileInputStream("img/saves/player_save.bin");
-            arquivoLeitura2 = new FileInputStream("img/saves/rebels_save.bin");
-            arquivoLeitura3 = new FileInputStream("img/saves/empire_save.bin");
-            arquivoLeitura4 = new FileInputStream("img/saves/battlefield_save.bin");
+            arquivoLeitura1 = new FileInputStream("img/save.bin");
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Será iniciado um novo jogo", "Arquivo de save não encontrado", JOptionPane.ERROR_MESSAGE, null);
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
+            this.arquivo_encontrado = false;
+            
+            //sai do construtor
+            return;
         }
         
         try {
             objLeitura1 = new ObjectInputStream(arquivoLeitura1);
-            objLeitura2 = new ObjectInputStream(arquivoLeitura2);
-            objLeitura3 = new ObjectInputStream(arquivoLeitura3);
-            objLeitura4 = new ObjectInputStream(arquivoLeitura4);
         } catch (IOException ex) {
             Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            this.player = (Player) objLeitura1.readObject();
+            this.save_list =  (ArrayList<Object>) objLeitura1.readObject();
         } catch (IOException ex) {
             Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            this.rebels = (ArrayList<SpaceIcon>) objLeitura2.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {     
-            this.empire  = (ArrayList<SpaceIcon>) objLeitura3.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            this.battlefield = (Battlefield) objLeitura4.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         try {
             objLeitura1.close();
-            objLeitura2.close();
-            objLeitura3.close();
-            objLeitura4.close();
         } catch (IOException ex) {
             Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         try {
             arquivoLeitura1.close();
-            arquivoLeitura2.close();
-            arquivoLeitura3.close();
-            arquivoLeitura4.close();
         } catch (IOException ex) {
             Logger.getLogger(OpenSave.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        this.player = (Player) save_list.get(0);
+        this.rebels = (ArrayList<SpaceIcon>) save_list.get(1);
+        this.empire = (ArrayList<SpaceIcon>) save_list.get(2);
+        this.battlefield = (Battlefield) save_list.get(3);
         
     }
-    
     
     //GETTERS ================================================================================================
     
@@ -115,5 +91,10 @@ public class OpenSave {
     public Battlefield getBattlefield() {
         return battlefield;
     }
+
+    public boolean isArquivo_encontrado() {
+        return arquivo_encontrado;
+    }
+    
     
 }
